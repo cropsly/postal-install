@@ -10,7 +10,7 @@ metadata:
     release: {{ .Release.Name }}
 spec:
   strategy:
-    {{ toYaml .Values.smtp.strategy | indent 6 }}
+{{ toYaml .Values.smtp.strategy | indent 6 }}
   selector:
     matchLabels:
       app: {{ template "postal.name" . }}
