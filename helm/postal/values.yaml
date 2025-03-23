@@ -81,6 +81,11 @@ web:
   pdb:
     minAvailable: 1
     maxUnavailable: ~
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 20%
+      maxSurge: 20%
           
 smtp: 
   replicas: 1
@@ -90,9 +95,19 @@ smtp:
   pdb:
     minAvailable: 1
     maxUnavailable: ~
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 20%
+      maxSurge: 20%
 
 worker: 
   replicas: 1
   pdb:
     minAvailable: 1
     maxUnavailable: ~
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 20%
+      maxSurge: 20%

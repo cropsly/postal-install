@@ -10,18 +10,13 @@ metadata:
     release: {{ .Release.Name }}
 spec:
   strategy:
-    type: RollingUpdate
-    rollingUpdate:
-      maxUnavailable: 20%
-      maxSurge: 20%
+    {{ toYaml .Values.smtp.strategy | indent 6 }}
   selector:
     matchLabels:
       app: {{ template "postal.name" . }}
       component: smtp
   # at the moment, we only support one replica
   replicas: {{ .Values.smtp.replicas }}
-  strategy:
-    type: Recreate
   template:
     metadata:
       labels:
@@ -36,7 +31,7 @@ spec:
         imagePullPolicy: "{{ .Values.imagePullPolicy }}"
         command: ["postal", "smtp-server"]
         resources:
-{{ toYaml .Values.resources | indent 10 }}          
+{{ toYaml .Values.resources | indent 10 }}
         ports:
         - name: smtp
           containerPort: 25

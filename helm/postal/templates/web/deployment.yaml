@@ -10,18 +10,13 @@ metadata:
     release: {{ .Release.Name }}
 spec:
   strategy:
-    type: RollingUpdate
-    rollingUpdate:
-      maxUnavailable: 20%
-      maxSurge: 20%
+    {{ toYaml .Values.smtp.strategy | indent 6 }}
   selector:
     matchLabels:
       app: {{ template "postal.name" . }}
       component: web
   # at the moment, we only support one replica
   replicas: {{ .Values.web.replicas }}
-  strategy:
-    type: Recreate
   template:
     metadata:
       labels:
