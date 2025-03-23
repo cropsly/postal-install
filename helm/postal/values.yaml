@@ -78,12 +78,21 @@ web:
       - secretName: postal-web-tls
         hosts:
           - example.com
+  pdb:
+    minAvailable: 1
+    maxUnavailable: ~
           
 smtp: 
   replicas: 1
   service:
     type: LoadBalancer
     loadBalancerIP: 
+  pdb:
+    minAvailable: 1
+    maxUnavailable: ~
 
 worker: 
   replicas: 1
+  pdb:
+    minAvailable: 1
+    maxUnavailable: ~

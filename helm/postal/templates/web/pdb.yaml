@@ -1,0 +1,13 @@
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: {{ template "postal.fullname" . }}-web-pdb
+  labels:
+    app: {{ template "postal.name" . }}
+    chart: {{ .Chart.Name }}-{{ .Chart.Version }}
+spec:
+  minAvailable: {{ .Values.web.pdb.minAvailable }}
+  maxUnavailable: {{ .Values.web.pdb.maxUnavailable }}
+  selector:
+    matchLabels:
+        app: {{ template "postal.fullname" . }}-web

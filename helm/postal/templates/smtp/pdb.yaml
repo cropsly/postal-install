@@ -1,0 +1,13 @@
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: {{ template "postal.fullname" . }}-smtp-pdb
+  labels:
+    app: {{ template "postal.name" . }}
+    chart: {{ .Chart.Name }}-{{ .Chart.Version }}
+spec:
+  minAvailable: {{ .Values.smtp.pdb.minAvailable }}
+  maxUnavailable: {{ .Values.smtp.pdb.maxUnavailable }}
+  selector:
+    matchLabels:
+        app: {{ template "postal.fullname" . }}-smtp
